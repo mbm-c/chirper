@@ -11,8 +11,8 @@ config :logger, level: :warn
 
 # Configure your database
 config :chirper, Chirper.Repo,
-  username: "postgres",
-  password: "welcome",
+  username: System.get_env("DATABASE_POSTGRESQL_USERNAME"),
+  password: System.get_env("DATABASE_POSTGRESQL_PASSWORD"),
   database: "chirper_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
