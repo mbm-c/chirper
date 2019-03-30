@@ -12,7 +12,7 @@ config :logger, level: :warn
 # Configure your database
 config :chirper, Chirper.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "welcome",
   database: "chirper_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
