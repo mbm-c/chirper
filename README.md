@@ -1,5 +1,7 @@
 # Chirper
 [![Build Status](https://semaphoreci.com/api/v1/maneeshbabu/chirper/branches/master/shields_badge.svg)](https://semaphoreci.com/maneeshbabu/chirper)
+
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
