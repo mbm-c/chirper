@@ -6,9 +6,9 @@ defmodule Chirper.AccountsTest do
   describe "users" do
     alias Chirper.Accounts.User
 
-    @valid_attrs %{name: "some name", password: "some password"}
+    @valid_attrs %{name: "some name", password: "some password", email: "user@email.com"}
     @update_attrs %{name: "some updated name", password: "some updated password"}
-    @invalid_attrs %{name: nil, password: nil}
+    @invalid_attrs %{name: nil, password: nil, email: nil}
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
