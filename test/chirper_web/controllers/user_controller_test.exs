@@ -3,7 +3,7 @@ defmodule ChirperWeb.UserControllerTest do
 
   alias Chirper.Accounts
 
-  @create_attrs %{name: "some name", password: "some password"}
+  @create_attrs %{name: "some name", password: "some password", email: "user@email.com"}
   @update_attrs %{name: "some updated name", password: "some updated password"}
   @invalid_attrs %{name: nil, password: nil}
 
