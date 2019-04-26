@@ -1,6 +1,8 @@
 defmodule Chirper.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Chirper.Accounts.User
+  alias Comeonin.Bcrypt
 
   schema "users" do
     field :encrypted_password, :string
@@ -10,10 +12,11 @@ defmodule Chirper.Accounts.User do
   end
 
   @doc false
-  def changeset(user, attrs) do
+  def changeset(%User{} = user, attrs) do
     user
     |> cast(attrs, [:username, :encrypted_password])
-    |> validate_required([:username, :encrypted_password])
     |> unique_constraint(:username)
+    |> validate_required([:username, :encrypted_password])
+    |> update_change(:encrypted_password, &Bcrypt.hashpwsalt/1)
   end
 end
