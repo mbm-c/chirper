@@ -4,7 +4,7 @@ defmodule ChirperWeb.UserControllerTest do
   alias Chirper.Accounts
 
   @create_attrs %{encrypted_password: "some encrypted_password", username: "some username"}
-  @update_attrs %{encrypted_password: "some updated encrypted_password", username: "some updated username"}
+  # @update_attrs %{encrypted_password: "some updated encrypted_password", username: "some updated username"}
   @invalid_attrs %{encrypted_password: nil, username: nil}
 
   def fixture(:user) do
@@ -31,8 +31,8 @@ defmodule ChirperWeb.UserControllerTest do
     end
   end
 
-  defp create_user(_) do
-    user = fixture(:user)
-    {:ok, user: user}
-  end
+  # defp create_user(_) do
+  #   user = fixture(:user)
+  #   {:ok, user: user}
+  # end
 end
