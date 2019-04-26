@@ -19,6 +19,9 @@ defmodule ChirperWeb.Router do
     get "/", PageController, :index
 
     resources "/user", UserController, only: [:create, :new]
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    delete "/logout", SessionController, :delete
   end
 
   # Other scopes may use custom stacks.
