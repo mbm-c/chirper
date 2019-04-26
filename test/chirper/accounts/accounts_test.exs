@@ -64,5 +64,11 @@ defmodule Chirper.AccountsTest do
       user = user_fixture()
       assert %Ecto.Changeset{} = Accounts.change_user(user)
     end
+
+    test "get_by_username/1 returns valid user" do
+      user = user_fixture()
+      assert nil == Accounts.get_by_username("someone")
+      assert user == Accounts.get_by_username(user.username)
+    end
   end
 end
