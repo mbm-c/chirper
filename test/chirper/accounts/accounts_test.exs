@@ -31,8 +31,8 @@ defmodule Chirper.AccountsTest do
 
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert user.encrypted_password == "some encrypted_password"
-      assert user.username == "some username"
+      assert {:ok, %User{} = newUser} = Comeonin.Bcrypt.check_pass(user, "some encrypted_password")
+      assert user.username == newUser.username
     end
 
     test "create_user/1 with invalid data returns error changeset" do
@@ -42,8 +42,9 @@ defmodule Chirper.AccountsTest do
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
       assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
-      assert user.encrypted_password == "some updated encrypted_password"
-      assert user.username == "some updated username"
+      assert {:ok, %User{} = updatedUser} = Comeonin.Bcrypt.check_pass(user, "some updated encrypted_password")
+      assert {:error, _ } = Comeonin.Bcrypt.check_pass(user, "some encrypted_password")
+      assert user.username == updatedUser.username
     end
 
     test "update_user/2 with invalid data returns error changeset" do
