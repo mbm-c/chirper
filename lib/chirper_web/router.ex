@@ -17,6 +17,7 @@ defmodule ChirperWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/show", PageController, :show
 
     resources "/user", UserController, only: [:create, :new]
     get "/login", SessionController, :new
