@@ -20,6 +20,14 @@ defmodule ChirperWeb.Router do
     resources "/users", UserController
   end
 
+  scope "/auth", MyApp do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/identity/callback", AuthController, :identity_callback
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", ChirperWeb do
   #   pipe_through :api
