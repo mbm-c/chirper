@@ -42,6 +42,8 @@ defmodule ChirperWeb do
       import ChirperWeb.ErrorHelpers
       import ChirperWeb.Gettext
       alias ChirperWeb.Router.Helpers, as: Routes
+
+      import ChirperWeb.Helpers.Auth, only: [signed_in?: 1]
     end
   end
 

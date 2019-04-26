@@ -43,7 +43,8 @@ defmodule Chirper.AccountsTest do
       user = user_fixture()
       assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
       assert {:ok, %User{} = updatedUser} = Comeonin.Bcrypt.check_pass(user, "some updated encrypted_password")
-      assert {:error, _ } = Comeonin.Bcrypt.check_pass(user, "some encrypted_password")
+      error = "invalid password"
+      assert {:error,  ^error} = Comeonin.Bcrypt.check_pass(user, "some encrypted_password")
       assert user.username == updatedUser.username
     end
 
