@@ -15,7 +15,7 @@ defmodule ChirperWeb.UserController do
         conn
         |> put_session(:current_user_id, user.id)
         |> put_flash(:info, "Signed up successfully.")
-        |> redirect(to: Routes.page_path(conn, :index))
+        |> redirect(to: Routes.page_path(conn, :show))
     {:error, %Ecto.Changeset{} = changeset} ->
       render(conn, "new.html", changeset: changeset)
     end
