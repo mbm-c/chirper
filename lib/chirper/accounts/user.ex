@@ -14,13 +14,10 @@ defmodule Chirper.Accounts.User do
     timestamps()
   end
 
-  @required_fields ~w(username password)
-  @optional_fields ~w()
-
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, @required_fields, @optional_fields)
+    |> cast(attrs, [:username, :password])
     |> validate_required([:username])
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
