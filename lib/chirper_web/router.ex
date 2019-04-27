@@ -27,8 +27,7 @@ defmodule ChirperWeb.Router do
   scope "/", ChirperWeb do
     pipe_through :browser
 
-    get "/", SessionController, :new
-    resources "/user", UserController, only: [:create, :new]
+    resources "/register", UserController, only: [:create, :new]
     get "/login", SessionController, :new
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
@@ -37,6 +36,7 @@ defmodule ChirperWeb.Router do
   scope "/", ChirperWeb do
     pipe_through :browser_auth
 
+    get "/", PageController, :index
     get "/show", PageController, :show
   end
 
@@ -52,8 +52,8 @@ defmodule ChirperWeb.Router do
         |> assign(:current_user, current_user)
     else
       conn
-        |> put_flash(:error, "You need to be signed in to access that page.")
-        |> redirect(to: "/")
+        # |> put_flash(:error, "You need to be signed in to access that page.")
+        |> redirect(to: "/login")
         |> halt()
     end
   end
