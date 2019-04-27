@@ -22,7 +22,7 @@ defmodule ChirperWeb.UserControllerTest do
   describe "create user" do
     test "redirects to show when data is valid", %{conn: conn} do
       conn = post(conn, Routes.user_path(conn, :create), user: @create_attrs)
-      assert redirected_to(conn) == Routes.page_path(conn, :index)
+      assert redirected_to(conn) == Routes.page_path(conn, :show)
     end
 
     test "renders errors when data is invalid", %{conn: conn} do

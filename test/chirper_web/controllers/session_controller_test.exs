@@ -30,7 +30,7 @@ defmodule ChirperWeb.SessionControllerTest do
     test "success if the user is registered", %{conn: conn} do
       user = user_fixture()
       conn = post(conn, Routes.session_path(conn, :create), session: @valid_login)
-      assert redirected_to(conn) == Routes.page_path(conn, :index)
+      assert redirected_to(conn) == Routes.page_path(conn, :show)
       user_id = Plug.Conn.get_session(conn, :current_user_id)
       assert user_id == user.id
       assert user == Accounts.get_user!(user_id)
@@ -41,13 +41,13 @@ defmodule ChirperWeb.SessionControllerTest do
     test "should logout, logged in user", %{conn: conn} do
       user = user_fixture()
       conn = post(conn, Routes.session_path(conn, :create), session: @valid_login)
-      assert redirected_to(conn) == Routes.page_path(conn, :index)
+      assert redirected_to(conn) == Routes.page_path(conn, :show)
       user_id = Plug.Conn.get_session(conn, :current_user_id)
       assert user_id == user.id
       assert user == Accounts.get_user!(user_id)
 
       conn = delete(conn, Routes.session_path(conn, :delete))
-      assert redirected_to(conn) == Routes.page_path(conn, :index)
+      assert redirected_to(conn) == Routes.session_path(conn, :new)
       user_id = Plug.Conn.get_session(conn, :current_user_id)
       assert user_id == nil
     end
