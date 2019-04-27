@@ -23,3 +23,7 @@
 .secondary-text {
     color: #757575 !important;
 }
+
+.card-form {
+    padding: 10px;
+}
