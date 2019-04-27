@@ -26,4 +26,14 @@
 
 .card-form {
     padding: 10px;
+    margin-bottom: 0px;
+}
+
+.help-block {
+    color: red !important;
+    padding-bottom: 5px;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
 }
