@@ -3,3 +3,23 @@
 @import "../node_modules/materialize-css/dist/css/materialize.css";
 
 @import "./phoenix.css";
+
+.primary-dark-color {
+    background-color: #512DA8 !important;
+}
+
+.primary-color {
+    background-color: #673AB7 !important;
+}
+
+.primary-text {
+    color: #212121 !important;
+}
+
+.seconday-color {
+    background-color: #795548 !important;
+}
+
+.secondary-text {
+    color: #757575 !important;
+}
