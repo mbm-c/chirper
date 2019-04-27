@@ -14,15 +14,13 @@
       <div class="nav-wrapper primary-dark-color">
         <a href="/" class="brand-logo">CHIRPER</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="#">Link A</a></li>
-          <li><a href="#">Link B</a></li>
-          <li>
             <%= if signed_in?(@conn) do %>
-              <%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete %>
+              <li><a href="#">Link A</a></li>
+              <li><a href="#">Link B</a></li>
+              <li><%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete %></li>
             <% else %>
-              <%= link "Login", to: Routes.session_path(@conn, :new) %>
+              <%# <%= link "Login", to: Routes.session_path(@conn, :new) %>
             <% end %>
-          </li>
         </ul>
       </div>
     </nav>
