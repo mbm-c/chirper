@@ -7,7 +7,8 @@
           <%= form_for @conn, Routes.session_path(@conn, :new), [as: :session], fn f -> %>
             <%= text_input f, :username, placeholder: "Username" %>
             <%= password_input f, :password, placeholder: "Password" %>
-            <%= submit "Sign in", class: "btn right secondary-color" %>
+            <%= submit "Login", class: "btn right secondary-color" %>
+            <%= link "Register", to: Routes.user_path(@conn, :new), class: "btn secondary-color" %>
           <% end %>
           </div>
 
