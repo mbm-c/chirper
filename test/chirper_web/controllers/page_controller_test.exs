@@ -3,7 +3,7 @@ defmodule ChirperWeb.PageControllerTest do
 
   alias Chirper.Accounts
 
-  @valid_attrs %{encrypted_password: "some encrypted_password", username: "some username"}
+  @valid_attrs %{password: "some encrypted_password", password_confirmation: "some encrypted_password", username: "some username"}
   @valid_login %{password: "some encrypted_password", username: "some username"}
 
   def user_fixture(attrs \\ %{}) do
@@ -12,7 +12,7 @@ defmodule ChirperWeb.PageControllerTest do
       |> Enum.into(@valid_attrs)
       |> Accounts.create_user()
 
-      user
+      Accounts.get_user!(user.id)
   end
 
   test "GET / redirects to login if not logged in", %{conn: conn} do

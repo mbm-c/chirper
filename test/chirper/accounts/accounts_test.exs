@@ -4,10 +4,10 @@ defmodule Chirper.AccountsTest do
   alias Chirper.Accounts
 
   describe "users" do
-    alias Chirper.Accounts.User
+    alias Chirper.Accounts.{User, Encryption}
 
-    @valid_attrs %{encrypted_password: "some encrypted_password", username: "some username"}
-    @update_attrs %{encrypted_password: "some updated encrypted_password", username: "some updated username"}
+    @valid_attrs %{password: "some encrypted_password", password_confirmaton: "some encrypted_password", username: "some username"}
+    @update_attrs %{password: "some updated encrypted_password", password_confirmaton: "some updated encrypted_password", username: "some updated username"}
     @invalid_attrs %{encrypted_password: nil, username: nil}
 
     def user_fixture(attrs \\ %{}) do
@@ -20,18 +20,21 @@ defmodule Chirper.AccountsTest do
     end
 
     test "list_users/0 returns all users" do
-      user = user_fixture()
-      assert Accounts.list_users() == [user]
+      users = Accounts.list_users()
+      users_count = length(users)
+      user_fixture()
+      new_users = Accounts.list_users()
+      assert users_count + 1 == length(new_users)
     end
 
     test "get_user!/1 returns the user with given id" do
       user = user_fixture()
-      assert Accounts.get_user!(user.id) == user
+      assert Accounts.get_user!(user.id).username == user.username
     end
 
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert {:ok, %User{} = newUser} = Comeonin.Bcrypt.check_pass(user, "some encrypted_password")
+      assert {:ok, %User{} = newUser} = Encryption.validate_password(user, "some encrypted_password")
       assert user.username == newUser.username
     end
 
@@ -42,16 +45,16 @@ defmodule Chirper.AccountsTest do
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
       assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
-      assert {:ok, %User{} = updatedUser} = Comeonin.Bcrypt.check_pass(user, "some updated encrypted_password")
+      assert {:ok, %User{} = updatedUser} = Encryption.validate_password(user, "some updated encrypted_password")
       error = "invalid password"
-      assert {:error,  ^error} = Comeonin.Bcrypt.check_pass(user, "some encrypted_password")
+      assert {:error,  ^error} = Encryption.validate_password(user, "some encrypted_password")
       assert user.username == updatedUser.username
     end
 
     test "update_user/2 with invalid data returns error changeset" do
       user = user_fixture()
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, @invalid_attrs)
-      assert user == Accounts.get_user!(user.id)
+      assert user.username == Accounts.get_user!(user.id).username
     end
 
     test "delete_user/1 deletes the user" do
@@ -68,7 +71,7 @@ defmodule Chirper.AccountsTest do
     test "get_by_username/1 returns valid user" do
       user = user_fixture()
       assert nil == Accounts.get_by_username("someone")
-      assert user == Accounts.get_by_username(user.username)
+      assert user.id == Accounts.get_by_username(user.username).id
     end
   end
 end

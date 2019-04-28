@@ -2,7 +2,7 @@ defmodule ChirperWeb.SessionControllerTest do
   use ChirperWeb.ConnCase
   alias Chirper.Accounts
 
-  @valid_attrs %{encrypted_password: "some encrypted_password", username: "some username"}
+  @valid_attrs %{password: "some encrypted_password", password_confirmation: "some encrypted_password", username: "some username"}
   @valid_login %{password: "some encrypted_password", username: "some username"}
 
   def user_fixture(attrs \\ %{}) do
@@ -11,7 +11,7 @@ defmodule ChirperWeb.SessionControllerTest do
       |> Enum.into(@valid_attrs)
       |> Accounts.create_user()
 
-      user
+    Accounts.get_user!(user.id)
   end
 
   # describe "new user" do
