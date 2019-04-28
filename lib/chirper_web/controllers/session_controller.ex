@@ -3,6 +3,7 @@ defmodule ChirperWeb.SessionController do
 
   alias Chirper.Accounts.Auth
   alias Chirper.Repo
+
   def new(conn, _params) do
     render(conn, "new.html")
   end

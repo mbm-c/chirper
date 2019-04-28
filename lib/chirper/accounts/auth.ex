@@ -18,10 +18,7 @@ defmodule Chirper.Accounts.Auth do
     end
   end
 
-  def current_user(conn) do
-      id = Plug.Conn.get_session(conn, :current_user_id)
-      if id, do: Chirper.Repo.get(User, id)
+  def signed_in?(conn) do
+    conn.assigns[:current_user]
   end
-
-  def signed_in?(conn), do: !!current_user(conn)
 end
