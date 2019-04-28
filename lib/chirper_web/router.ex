@@ -15,8 +15,23 @@ defmodule ChirperWeb.Router do
 
   scope "/", ChirperWeb do
     pipe_through :browser
+    pipe_through ChirperWeb.Plugs.Guest
+
+    resources "/register", UserController, only: [:create, :new]
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+  end
+
+
+  scope "/", ChirperWeb do
+    pipe_through :browser
+    pipe_through ChirperWeb.Plugs.Auth
+
+    delete "/logout", SessionController, :delete
+
 
     get "/", PageController, :index
+    get "/show", PageController, :show
   end
 
   # Other scopes may use custom stacks.
