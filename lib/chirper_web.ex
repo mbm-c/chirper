@@ -43,7 +43,7 @@ defmodule ChirperWeb do
       import ChirperWeb.Gettext
       alias ChirperWeb.Router.Helpers, as: Routes
 
-      import ChirperWeb.Helpers.Auth, only: [signed_in?: 1]
+      import Chirper.Accounts.Auth, only: [signed_in?: 1, current_user: 1]
     end
   end
 

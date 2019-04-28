@@ -7,17 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>CHIRPER</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
     <nav>
       <div class="nav-wrapper primary-dark-color">
         <a href="/" class="brand-logo">CHIRPER</a>
+     
+        <!-- Dropdown Structure User actions -->
+        <ul id="user-actions" class="dropdown-content">
+          <li><%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete %></li>
+        </ul>
+
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <%= if signed_in?(@conn) do %>
               <li><a href="#">Link A</a></li>
               <li><a href="#">Link B</a></li>
-              <li><%= link "Logout", to: Routes.session_path(@conn, :delete), method: :delete %></li>
+              <li><a class="dropdown-trigger" href="#!" data-target="user-actions"> <%= current_user(@conn).username %> <i class="material-icons right">arrow_drop_down</i></a></li>
             <% else %>
               <%# <%= link "Login", to: Routes.session_path(@conn, :new) %>
             <% end %>
@@ -42,6 +49,7 @@
       </div>
     </footer>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     </body>
   </html>

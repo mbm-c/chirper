@@ -15,3 +15,7 @@ import "../node_modules/materialize-css/dist/js/materialize"
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+
+$( document ).ready(() => {
+    $(".dropdown-trigger").dropdown({coverTrigger: false});
+})
