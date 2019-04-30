@@ -1,2 +1,2 @@
-release: mix ecto.migrate
+release: MIX_ENV=prod  mix ecto.migrate
 web: MIX_ENV=prod mix phoenix.server
