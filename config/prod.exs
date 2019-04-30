@@ -11,7 +11,7 @@ config :chirper, ChirperWeb.Endpoint,
 config :logger, level: :info
 
 database_url = System.get_env("DATABASE_URL")
-if database_url
+if database_url do
   # Configure your database
   config :chriper, Chirper.Repo,
     url: System.get_env("DATABASE_URL"),
