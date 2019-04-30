@@ -10,12 +10,9 @@ config :chirper, ChirperWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
-database_url = System.get_env("DATABASE_URL")
-if database_url do
-  # Configure your database
-  config :chriper, Chirper.Repo,
-    url: System.get_env("DATABASE_URL"),
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-    ssl: true
-end
+# Configure your database
+config :chriper, Chirper.Repo,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true
 
