@@ -1,6 +1,6 @@
 # Chirper
 [![Build Status](https://semaphoreci.com/api/v1/maneeshbabu/chirper/branches/master/shields_badge.svg)](https://semaphoreci.com/maneeshbabu/chirper)
-[![Coverage Status](https://coveralls.io/repos/github/maneeshbabu/chirper/badge.svg?branch=blog)](https://coveralls.io/github/maneeshbabu/chirper)
+[![Coverage Status](https://coveralls.io/repos/github/maneeshbabu/chirper/badge.svg?branch=master)](https://coveralls.io/github/maneeshbabu/chirper)
 
 To start your Phoenix server:
 
