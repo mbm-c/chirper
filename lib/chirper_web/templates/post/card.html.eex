@@ -1,0 +1,19 @@
+<div class='card'>
+    <div class='card-content'>
+        <div class=row>
+        <span class="card-title grey-text text-darken-4"><%= @post.title %><i class="material-icons right dropdown-trigger  activator" data-target='dropdown<%= @post.id %>'>more_vert</i></span>
+
+        <ul id='dropdown<%= @post.id %>' class='dropdown-content'>
+            <li><%= link "Edit", to: Routes.post_path(@conn, :edit, @post)  %></li>
+            <li><%= link "Delete", to: Routes.post_path(@conn, :delete, @post), method: :delete, data: [confirm: "Are you sure?"] %></li>
+        </ul>
+
+        <%= @post.body %>
+        <br/>
+        <div class="chip right">
+            <img src='<%= "https://ui-avatars.com/api/?name=#{@post.user.username}&bold=true&background=512DA8&color=FFF&rounded=true" %>' alt="Contact Person">
+            <%= @post.user.username %>
+        </div>
+        </div>
+    </div>
+</div>

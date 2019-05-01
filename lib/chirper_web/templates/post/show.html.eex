@@ -1,0 +1,2 @@
+<%= render "card.html", post: @post, conn: @conn %>
+<%# <span><%= link "Back", to: Routes.post_path(@conn, :index) </span> %>

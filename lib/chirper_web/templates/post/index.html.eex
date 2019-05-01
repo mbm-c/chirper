@@ -1,0 +1,13 @@
+<%= for post <- @posts do %>
+    <%= render "card.html", post: post, conn: @conn %>
+
+    <%# <tr> %>
+      <%# <td><%= post.title </td> %>
+      <%# <td><%= post.body </td> %>
+
+      <%# <td> %>
+        <%# <%= link "Show", to: Routes.post_path(@conn, :show, post)  %>
+        
+      <%# </td> %>
+    <%# </tr> %>
+<% end %>

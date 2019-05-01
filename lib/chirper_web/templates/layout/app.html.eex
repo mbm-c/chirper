@@ -22,8 +22,7 @@
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <%= if signed_in?(@conn) do %>
-              <li><a href="#">Link A</a></li>
-              <li><a href="#">Link B</a></li>
+              <li><%= link "New Post", to: Routes.post_path(@conn, :new) %></li>
               <li><a class="dropdown-trigger" href="#!" data-target="user-actions"> <%= @current_user.username %> <i class="material-icons right">arrow_drop_down</i></a></li>
             <% else %>
               <%# <%= link "Login", to: Routes.session_path(@conn, :new) %>

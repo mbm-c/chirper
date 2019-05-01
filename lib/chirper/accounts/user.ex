@@ -2,6 +2,7 @@ defmodule Chirper.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Chirper.Accounts.{User, Encryption}
+  alias Chirper.Blog.Post
 
   schema "users" do
     field :encrypted_password, :string
@@ -10,6 +11,7 @@ defmodule Chirper.Accounts.User do
     # VIRTUAL FIELDS
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
+    has_many :posts, Post
 
     timestamps()
   end

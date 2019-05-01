@@ -7,6 +7,7 @@ defmodule Chirper.Accounts do
   alias Chirper.Repo
 
   alias Chirper.Accounts.User
+  # alias Chirper.Blog.Post
 
   @doc """
   Returns the list of users.
@@ -18,7 +19,9 @@ defmodule Chirper.Accounts do
 
   """
   def list_users do
-    Repo.all(User)
+    User
+    |>Repo.all()
+    |> Repo.preload(:posts)
   end
 
   @doc """
@@ -35,7 +38,11 @@ defmodule Chirper.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user!(id) do
+    User
+    |> Repo.get!(id)
+    |> Repo.preload(:posts)
+  end
 
   @doc """
   Creates a user.
@@ -106,7 +113,9 @@ defmodule Chirper.Accounts do
     nil
   end
   def get_by_username(username) do
-    Repo.get_by(User, username: username)
+    User
+    |> Repo.get_by(username: username)
+    |> Repo.preload(:posts)
   end
-  
+
 end
