@@ -15,7 +15,7 @@ defmodule ChirperWeb.PostController do
   end
 
   def create(conn, %{"post" => post_params}) do
-    case Blog.create_post(post_params) do
+    case Blog.create_post(conn.assigns.current_user, post_params) do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
@@ -28,7 +28,12 @@ defmodule ChirperWeb.PostController do
 
   def show(conn, %{"id" => id}) do
     post = Blog.get_post!(id)
-    render(conn, "show.html", post: post)
+    case post do
+      nil ->
+        redirect(conn, to: Routes.post_path(conn, :index))
+      _ ->
+        render(conn, "show.html", post: post)
+    end
   end
 
   def edit(conn, %{"id" => id}) do

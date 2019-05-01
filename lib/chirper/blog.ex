@@ -7,6 +7,7 @@ defmodule Chirper.Blog do
   alias Chirper.Repo
 
   alias Chirper.Blog.Post
+  alias Chirper.Accounts.User
 
   @doc """
   Returns the list of posts.
@@ -18,7 +19,10 @@ defmodule Chirper.Blog do
 
   """
   def list_posts do
-    Repo.all(Post)
+    Post
+    |> Repo.all()
+    |> Repo.preload(:user)
+
   end
 
   @doc """
@@ -35,7 +39,11 @@ defmodule Chirper.Blog do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id) do
+    Post
+    |> Repo.get(id)
+    |> Repo.preload(:user)
+  end
 
   @doc """
   Creates a post.
@@ -49,9 +57,10 @@ defmodule Chirper.Blog do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_post(attrs \\ %{}) do
+  def create_post(%User{} = user, attrs \\ %{}) do
     %Post{}
     |> Post.changeset(attrs)
+    |> Ecto.Changeset.put_change(:user_id, user.id)
     |> Repo.insert()
   end
 
@@ -101,4 +110,6 @@ defmodule Chirper.Blog do
   def change_post(%Post{} = post) do
     Post.changeset(post, %{})
   end
+
+
 end

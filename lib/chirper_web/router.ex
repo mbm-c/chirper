@@ -20,7 +20,6 @@ defmodule ChirperWeb.Router do
     resources "/register", UserController, only: [:create, :new]
     get "/login", SessionController, :new
     post "/login", SessionController, :create
-    resources "/posts", PostController
   end
 
 
@@ -33,6 +32,7 @@ defmodule ChirperWeb.Router do
 
     get "/", PageController, :index
     get "/show", PageController, :show
+    resources "/posts", PostController
   end
 
   # Other scopes may use custom stacks.

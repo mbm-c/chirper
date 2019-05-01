@@ -5,18 +5,27 @@ defmodule Chirper.BlogTest do
 
   describe "posts" do
     alias Chirper.Blog.Post
+    alias Chirper.Accounts
 
     @valid_attrs %{body: "some body", title: "some title"}
     @update_attrs %{body: "some updated body", title: "some updated title"}
     @invalid_attrs %{body: nil, title: nil}
 
-    def post_fixture(attrs \\ %{}) do
-      {:ok, post} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Blog.create_post()
+    # for user
+    @valid_user_attrs %{password: "some encrypted_password", password_confirmaton: "some encrypted_password", username: "some username"}
 
-      post
+    def user_fixture(attrs \\ %{}) do
+      {:ok, user} =
+        attrs
+        |> Enum.into(@valid_user_attrs)
+        |> Accounts.create_user()
+      Accounts.get_user!(user.id)
+    end
+
+    def post_fixture() do
+      user= user_fixture()
+      {:ok, created} = Blog.create_post(user, @valid_attrs)
+      Blog.get_post!(created.id)
     end
 
     test "list_posts/0 returns all posts" do
@@ -30,13 +39,15 @@ defmodule Chirper.BlogTest do
     end
 
     test "create_post/1 with valid data creates a post" do
-      assert {:ok, %Post{} = post} = Blog.create_post(@valid_attrs)
+      user = user_fixture()
+      assert {:ok, %Post{} = post} = Blog.create_post(user, @valid_attrs)
       assert post.body == "some body"
       assert post.title == "some title"
     end
 
     test "create_post/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Blog.create_post(@invalid_attrs)
+      user = user_fixture()
+      assert {:error, %Ecto.Changeset{}} = Blog.create_post(user, @invalid_attrs)
     end
 
     test "update_post/2 with valid data updates the post" do
@@ -55,7 +66,7 @@ defmodule Chirper.BlogTest do
     test "delete_post/1 deletes the post" do
       post = post_fixture()
       assert {:ok, %Post{}} = Blog.delete_post(post)
-      assert_raise Ecto.NoResultsError, fn -> Blog.get_post!(post.id) end
+      assert nil == Blog.get_post!(post.id)
     end
 
     test "change_post/1 returns a post changeset" do

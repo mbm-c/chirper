@@ -5,7 +5,8 @@ defmodule Chirper.Blog.Post do
   schema "posts" do
     field :body, :string
     field :title, :string
-    field :user_id, :id
+    # field :user_id, :id
+    belongs_to :user, Chirper.Accounts.User, foreign_key: :user_id
 
     timestamps()
   end
