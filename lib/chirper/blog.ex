@@ -20,9 +20,9 @@ defmodule Chirper.Blog do
   """
   def list_posts do
     Post
+    |> order_by(desc: :id)
     |> Repo.all()
     |> Repo.preload(:user)
-
   end
 
   @doc """

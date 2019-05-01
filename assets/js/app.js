@@ -19,5 +19,5 @@ import "../node_modules/materialize-css/dist/js/materialize";
 // import socket from "./socket"
 
 $( document ).ready(function() {
-    $(".dropdown-trigger").dropdown({coverTrigger: false});
+    $(".dropdown-trigger").dropdown({coverTrigger: false, alignment: 'right'});
 })

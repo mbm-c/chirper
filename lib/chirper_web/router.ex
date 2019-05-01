@@ -30,7 +30,7 @@ defmodule ChirperWeb.Router do
     delete "/logout", SessionController, :delete
 
 
-    get "/", PageController, :index
+    get "/", PostController, :index
     get "/show", PageController, :show
     resources "/posts", PostController
   end
