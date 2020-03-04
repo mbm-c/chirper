@@ -27,9 +27,9 @@ jobs:
       run: |
         mix local.rebar --force
         mix local.hex --force
-        mix deps.get
+        mix deps.get --only test
     - name: Run Tests
       env:
         DATABASE_POSTGRESQL_USERNAME: pg_user
         DATABASE_POSTGRESQL_PASSWORD: pg_password
-      run: mix test
+      run: MIX_ENV=test mix
